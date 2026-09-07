@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from '../ui/Container';
 
 export function Footer() {
@@ -7,8 +8,14 @@ export function Footer() {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-32">
           
-          <div className="flex flex-col gap-4">
-            <div className="font-sans font-semibold text-xl text-foreground tracking-tight">orizenn</div>
+          <div className="flex flex-col gap-6">
+            <Image 
+              src="/logo.svg" 
+              alt="Orizenn Logo" 
+              width={40} 
+              height={40} 
+              className="w-10 h-10"
+            />
             <p className="font-sans text-muted">Let the work speak.</p>
           </div>
           
@@ -24,7 +31,6 @@ export function Footer() {
             <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Company</h4>
             <Link href="/about" className="font-sans text-small text-muted transition-colors hover:text-foreground">About</Link>
             <Link href="/institutions" className="font-sans text-small text-muted transition-colors hover:text-foreground">For Institutions</Link>
-            <Link href="/contact" className="font-sans text-small text-muted transition-colors hover:text-foreground">Contact</Link>
           </div>
 
           <div className="flex flex-col gap-4">

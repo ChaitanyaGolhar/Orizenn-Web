@@ -7,7 +7,7 @@
   --color-surface: #141416; /* Dark graphite */
   --color-border: rgba(255, 255, 255, 0.1); /* Low-contrast cool gray */
   --color-muted: #88888a; /* Muted cool gray */
-  --color-signal: #0066FF; /* Orizenn blue placeholder */
+  --color-signal: #006BFF; /* Exact Orizenn UI blue */
 
   /* Typography Scale */
   --text-hero: clamp(5.5rem, 8vw, 7rem); /* 88-112px */
@@ -16,6 +16,10 @@
   --text-body: 1.125rem; /* 18px */
   --text-small: 1rem; /* 16px */
   --text-micro: 0.75rem; /* 12px */
+  
+  /* Layout constraints */
+  --container-max: 1400px;
+
   
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
