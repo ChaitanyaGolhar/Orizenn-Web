@@ -1,0 +1,46 @@
+.problemSection {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  background-color: var(--color-bg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.body {
+  font-size: var(--text-large);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.closing {
+  font-size: var(--text-large);
+  color: var(--color-text);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: var(--space-md);
+  border-left: 2px solid var(--color-border);
+  padding-left: var(--space-md);
+}

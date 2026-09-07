@@ -1,0 +1,50 @@
+.institutionsSection {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  background-color: var(--color-surface);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 900px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md) 0;
+  line-height: 1.1;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  font-size: var(--text-large);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.body p {
+  margin: 0;
+  max-width: 45ch;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}

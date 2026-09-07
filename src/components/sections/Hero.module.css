@@ -1,0 +1,120 @@
+.heroSection {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: 5fr 7fr;
+    align-items: center;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.body {
+  font-size: var(--text-large);
+  color: var(--color-text-muted);
+  max-width: 32ch;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.supportLine {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--color-text-muted);
+  margin-top: var(--space-lg);
+  opacity: 0.5;
+}
+
+/* Visuals Side */
+.visuals {
+  position: relative;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.nodesContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.scatterNode {
+  position: absolute;
+  transition: all 0.5s ease;
+}
+
+.n1 { top: 10%; left: 10%; }
+.n2 { top: 20%; right: 20%; }
+.n3 { bottom: 30%; left: 15%; }
+.n4 { bottom: 15%; right: 10%; }
+.n5 { top: 50%; left: 5%; }
+
+.flowSystem {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glowOrb {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0,102,255,0.15) 0%, rgba(0,102,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.centralNode {
+  position: relative;
+  z-index: 2;
+  transform: scale(1.2);
+}

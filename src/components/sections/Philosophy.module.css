@@ -1,0 +1,50 @@
+.philosophySection {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  background-color: var(--color-bg);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.body {
+  font-size: var(--text-large);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.featured {
+  font-family: var(--font-sans);
+  font-size: var(--text-large);
+  font-weight: 500;
+  color: var(--color-signal);
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.02);
+}

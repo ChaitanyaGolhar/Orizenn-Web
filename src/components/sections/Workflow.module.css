@@ -1,0 +1,64 @@
+.workflowSection {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  min-height: 150vh; /* Allow enough scrolling space for the interaction */
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.intro {
+  font-size: var(--text-large);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+  line-height: 1.4;
+  margin: 0 0 var(--space-xl) 0;
+}
+
+.systemContainer {
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.stageRow {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+}
+
+.lineRow {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  height: 80px;
+}
+
+.visualColumn {
+  display: flex;
+  justify-content: center;
+}
+
+.contentColumn {
+  padding-left: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .stageRow, .lineRow {
+    grid-template-columns: 200px 1fr;
+  }
+}
