@@ -1,46 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  /* Colors */
-  --color-bg: #0a0a0c; /* Near-black / charcoal */
+@theme inline {
+  --color-background: #0a0a0c; /* Near-black / charcoal */
+  --color-foreground: #f0f0f0; /* Off-white */
+  
   --color-surface: #141416; /* Dark graphite */
   --color-border: rgba(255, 255, 255, 0.1); /* Low-contrast cool gray */
-  --color-text: #f0f0f0; /* Off-white */
-  --color-text-muted: #88888a; /* Muted cool gray */
-  /* TODO: Extract exact Orizenn blue from logo assets */
-  --color-signal: #0066FF; 
-
-  /* Spacing */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 8rem;
-  --space-2xl: 12rem;
-
-  /* Layout */
-  --container-max: 1400px;
-  --grid-columns: 12;
+  --color-muted: #88888a; /* Muted cool gray */
+  --color-signal: #0066FF; /* Orizenn blue placeholder */
 
   /* Typography Scale */
   --text-hero: clamp(5.5rem, 8vw, 7rem); /* 88-112px */
   --text-h1: clamp(3.5rem, 5vw, 4.5rem); /* 56-72px */
   --text-large: clamp(1.5rem, 2vw, 1.75rem); /* 24-28px */
   --text-body: 1.125rem; /* 18px */
-  --text-body-secondary: 1rem; /* 16px */
+  --text-small: 1rem; /* 16px */
   --text-micro: 0.75rem; /* 12px */
-}
-
-@theme inline {
-  --color-background: var(--color-bg);
-  --color-foreground: var(--color-text);
+  
   --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
 
+:root {
+  /* Retain for direct CSS variable usage if needed outside Tailwind utility classes */
+  --color-signal: #0066FF;
+}
+
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

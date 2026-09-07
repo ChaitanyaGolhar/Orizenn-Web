@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styles from './Button.module.css';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -16,31 +15,32 @@ export function Button({
   className = '',
   onClick,
 }: ButtonProps) {
-  const baseClassName = `${styles.button} ${styles[variant]} ${className}`;
+  const baseClasses = "inline-flex items-center justify-center transition-all duration-200 cursor-pointer font-sans text-small";
+  
+  const variantClasses = variant === 'primary'
+    ? "px-6 py-3 font-medium text-foreground bg-transparent border border-border rounded-md hover:border-signal hover:text-signal hover:bg-signal/5"
+    : "px-0 py-3 font-medium text-muted border-none hover:text-foreground bg-transparent";
+
+  const fullClassName = `${baseClasses} ${variantClasses} ${className}`;
 
   if (href) {
     const isExternal = href.startsWith('http') || href.startsWith('//');
     if (isExternal) {
       return (
-        <a
-          href={href}
-          className={baseClassName}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={href} className={fullClassName} target="_blank" rel="noopener noreferrer">
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={baseClassName}>
+      <Link href={href} className={fullClassName}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={baseClassName} onClick={onClick}>
+    <button className={fullClassName} onClick={onClick}>
       {children}
     </button>
   );

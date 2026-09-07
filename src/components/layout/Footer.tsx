@@ -1,41 +1,42 @@
 import Link from 'next/link';
 import { Container } from '../ui/Container';
-import styles from './Footer.module.css';
 
 export function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className="bg-background pt-32 pb-16 border-t border-border">
       <Container>
-        <div className={styles.grid}>
-          <div className={styles.brandCol}>
-            <div className={styles.logo}>orizenn</div>
-            <p className={styles.tagline}>Let the work speak.</p>
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-32">
+          
+          <div className="flex flex-col gap-4">
+            <div className="font-sans font-semibold text-xl text-foreground tracking-tight">orizenn</div>
+            <p className="font-sans text-muted">Let the work speak.</p>
           </div>
           
-          <div className={styles.linkGroup}>
-            <h4 className={styles.groupTitle}>Product</h4>
-            <Link href="/product" className={styles.link}>Product</Link>
-            <Link href="/how-it-works" className={styles.link}>How It Works</Link>
-            <Link href="/evidence" className={styles.link}>Evidence</Link>
-            <a href="https://app.orizenn.com" className={styles.link}>Open App ↗</a>
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Product</h4>
+            <Link href="/product" className="font-sans text-small text-muted transition-colors hover:text-foreground">Product</Link>
+            <Link href="/how-it-works" className="font-sans text-small text-muted transition-colors hover:text-foreground">How It Works</Link>
+            <Link href="/evidence" className="font-sans text-small text-muted transition-colors hover:text-foreground">Evidence</Link>
+            <a href="https://app.orizenn.com" className="font-sans text-small text-muted transition-colors hover:text-foreground">Open App ↗</a>
           </div>
 
-          <div className={styles.linkGroup}>
-            <h4 className={styles.groupTitle}>Company</h4>
-            <Link href="/about" className={styles.link}>About</Link>
-            <Link href="/institutions" className={styles.link}>For Institutions</Link>
-            <Link href="/contact" className={styles.link}>Contact</Link>
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Company</h4>
+            <Link href="/about" className="font-sans text-small text-muted transition-colors hover:text-foreground">About</Link>
+            <Link href="/institutions" className="font-sans text-small text-muted transition-colors hover:text-foreground">For Institutions</Link>
+            <Link href="/contact" className="font-sans text-small text-muted transition-colors hover:text-foreground">Contact</Link>
           </div>
 
-          <div className={styles.linkGroup}>
-            <h4 className={styles.groupTitle}>Resources</h4>
-            <Link href="/insights" className={styles.link}>Insights</Link>
-            <Link href="/docs" className={styles.link}>Documentation</Link>
-            <Link href="/updates" className={styles.link}>Updates</Link>
+          <div className="flex flex-col gap-4">
+            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Resources</h4>
+            <Link href="/insights" className="font-sans text-small text-muted transition-colors hover:text-foreground">Insights</Link>
+            <Link href="/docs" className="font-sans text-small text-muted transition-colors hover:text-foreground">Documentation</Link>
+            <Link href="/updates" className="font-sans text-small text-muted transition-colors hover:text-foreground">Updates</Link>
           </div>
+
         </div>
 
-        <div className={styles.bottom}>
+        <div className="pt-8 border-t border-border font-sans text-micro text-muted">
           <p>© 2026 Orizenn. All rights reserved.</p>
         </div>
       </Container>

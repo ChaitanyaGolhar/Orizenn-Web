@@ -1,5 +1,3 @@
-import styles from './Container.module.css';
-
 export function Container({
   children,
   className = '',
@@ -8,7 +6,7 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`w-full max-w-[1400px] mx-auto px-8 md:px-16 ${className}`}>
       {children}
     </div>
   );

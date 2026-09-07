@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="1254" height="1254">
+  <defs>
+    <linearGradient id="arcGradient" x1="250" y1="250" x2="850" y2="950" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071725"/>
+      <stop offset="0.55" stop-color="#081928"/>
+      <stop offset="1" stop-color="#0A1B2A"/>
+    </linearGradient>
+
+    <linearGradient id="blueGradient" x1="880" y1="380" x2="1000" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4A91FF"/>
+      <stop offset="0.45" stop-color="#2175F5"/>
+      <stop offset="1" stop-color="#0057FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main rounded C-shaped mark -->
+  <path
+    d="M 813 313
+       A 353 353 0 1 0 766 921"
+    fill="none"
+    stroke="url(#arcGradient)"
+    stroke-width="94"
+    stroke-linecap="round"
+  />
+
+  <!-- Four ascending blue nodes -->
+  <circle cx="918.5" cy="414.1" r="28.5" fill="url(#blueGradient)" stroke="#006BFF" stroke-width="1.5"/>
+  <circle cx="968.4" cy="540.1" r="38"   fill="url(#blueGradient)" stroke="#006BFF" stroke-width="1.5"/>
+  <circle cx="968.6" cy="682.6" r="50"   fill="url(#blueGradient)" stroke="#006BFF" stroke-width="1.5"/>
+  <circle cx="901.1" cy="830.9" r="66"   fill="url(#blueGradient)" stroke="#006BFF" stroke-width="1.5"/>
+</svg>
