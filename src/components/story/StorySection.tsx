@@ -1,59 +1,53 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from '../ui/Container';
-import { STORY_SCENES } from './story-config';
 import { StoryRail } from './StoryRail';
-import { StoryBlock } from './StoryBlock';
+import { Act1Problem } from './acts/Act1Problem';
+import { Act2Approach } from './acts/Act2Approach';
+import { Act3HowItWorks } from './acts/Act3HowItWorks';
+import { Act4Principle } from './acts/Act4Principle';
 
 export function StorySection() {
-  const [activeStoryBlock, setActiveStoryBlock] = useState(0);
+  const [activeActId, setActiveActId] = useState('act1-problem');
+
+  useEffect(() => {
+    // Intersection Observer to detect which Act is currently visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveActId(entry.target.id);
+        }
+      });
+    }, {
+      rootMargin: '-50% 0px -50% 0px' // Trigger when the center of the act passes the center of the screen
+    });
+
+    const acts = document.querySelectorAll('.act-container');
+    acts.forEach(act => observer.observe(act));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative w-full bg-[#070709] border-t border-border/50">
       
-      {/* 
-        DESKTOP ARCHITECTURE
-        Left (25%): Sticky Rail
-        Right (75%): Scrolling Content (Narrative + Visual)
-      */}
-      <div className="hidden md:block py-32">
-        <Container className="relative w-full flex items-start">
+      <div className="py-24 md:py-32">
+        <Container className="relative w-full flex flex-col md:flex-row items-start">
           
-          {/* LEFT: STORY RAIL */}
-          <div className="w-[25%] sticky top-[25vh] h-[50vh] flex flex-col justify-center pr-8 z-20">
-            <StoryRail sceneIndex={activeStoryBlock} />
+          {/* LEFT: STORY RAIL (Hidden on mobile) */}
+          <div className="hidden md:flex w-[25%] sticky top-[25vh] h-[50vh] flex-col justify-center pr-8 z-20">
+            <StoryRail activeActId={activeActId} />
           </div>
 
-          {/* RIGHT: STORY CONTENT */}
-          <div className="w-[75%] relative z-10 flex flex-col">
-            {STORY_SCENES.map((scene, idx) => (
-              <StoryBlock 
-                key={scene.id} 
-                scene={scene} 
-                index={idx} 
-                onActive={setActiveStoryBlock} 
-              />
-            ))}
+          {/* RIGHT: STORY CONTENT (The 4 Acts) */}
+          <div className="w-full md:w-[75%] relative z-10 flex flex-col gap-24 md:gap-32">
+            <Act1Problem />
+            <Act2Approach />
+            <Act3HowItWorks />
+            <Act4Principle />
           </div>
 
-        </Container>
-      </div>
-
-      {/* 
-        MOBILE ARCHITECTURE
-        Single scrolling column. Sticky rail is completely removed.
-      */}
-      <div className="block md:hidden py-24">
-        <Container className="flex flex-col">
-          {STORY_SCENES.map((scene, idx) => (
-            <StoryBlock 
-              key={scene.id} 
-              scene={scene} 
-              index={idx} 
-              onActive={setActiveStoryBlock} 
-            />
-          ))}
         </Container>
       </div>
 
