@@ -11,7 +11,9 @@ export function Act1Problem() {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 1024px)", () => {
       // We will set up scroll-linked timelines here
       // linking the text blocks to the visual state.
       
@@ -98,20 +100,37 @@ export function Act1Problem() {
         .to(beat, { opacity: 1, duration: 0.6 })
         .to(beat, { opacity: 0, duration: 0.4 });
       });
+    });
 
-    }, containerRef);
-    return () => ctx.revert();
+    mm.add("(max-width: 1023px)", () => {
+      // Mobile-specific scroll transformation for Information Loss
+      gsap.fromTo('.mobile-visual-loss', 
+        { scale: 1.1, opacity: 0.5 },
+        {
+          scale: 1,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: '#beat-06',
+            start: 'top 80%',
+            end: 'center center',
+            scrub: true
+          }
+        }
+      );
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full relative flex flex-col md:flex-row act-container" id="act1-problem">
+    <div ref={containerRef} className="w-full relative flex flex-col lg:flex-row act-container" id="act1-problem">
       
-      {/* NARRATIVE COLUMN (Scrolls normally) */}
-      <div className="w-full md:w-5/12 flex flex-col relative z-20 md:pr-12">
+      {/* NARRATIVE COLUMN (Scrolls normally on desktop, stack on mobile) */}
+      <div className="w-full lg:w-5/12 flex flex-col relative z-20 lg:pr-12">
         
-        <div id="beat-01" className="min-h-[100vh] flex flex-col justify-center">
+        <div id="beat-01" className="min-h-[65vh] lg:min-h-[100vh] flex flex-col justify-center pt-16 lg:pt-0">
           <span className="font-mono text-[10px] text-signal tracking-widest uppercase mb-4 block">01 / THE PROBLEM</span>
-          <h2 className="font-sans text-3xl lg:text-4xl text-foreground leading-[1.1] tracking-tight mb-4">
+          <h2 className="font-sans text-3xl lg:text-4xl text-foreground leading-[1.1] tracking-tight mb-6">
             The work is there.<br/>We just don't see enough of it.
           </h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
@@ -119,65 +138,68 @@ export function Act1Problem() {
             But much of that work gets reduced to a grade, a resume, a certificate, or a portfolio — signals that rarely show the full picture.
           </p>
           
-          {/* Mobile Visual */}
-          <div className="md:hidden w-full aspect-square border border-white/5 rounded-full flex flex-col items-center justify-center bg-[#070709]/80 shadow-[0_0_80px_rgba(0,107,255,0.05)]">
-            <div className="text-[10px] text-signal font-mono tracking-widest uppercase mb-2">System Core</div>
-            <div className="font-sans text-xl text-white tracking-tight">Autonomous Navigation</div>
+          <div className="lg:hidden w-full aspect-square border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-xl">
+            <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Work (Dense)</span>
           </div>
         </div>
 
-        <div id="beat-02" className="min-h-[100vh] flex flex-col justify-center">
-          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-4">A snapshot, not the work.</h2>
+        <div id="beat-02" className="h-auto py-12 lg:min-h-[100vh] flex flex-col justify-center">
+          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-6">A snapshot, not the work.</h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A single number rarely captures the process, exploration, decisions, or depth behind the work.
           </p>
           
-          {/* Mobile Visual */}
-          <div className="md:hidden flex justify-center py-12">
-            <div className="text-7xl font-sans text-white leading-none tracking-tighter">
-              8.6<span className="text-4xl text-white/30 ml-2 font-light tracking-normal">/10</span>
-            </div>
+          <div className="lg:hidden flex justify-center py-8">
+            <span className="font-mono text-xl text-white/30 uppercase tracking-widest text-center">Mockup Placeholder: Grade</span>
           </div>
         </div>
 
-        <div id="beat-03" className="min-h-[100vh] flex flex-col justify-center">
-          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-4">Skills listed. Context missing.</h2>
+        <div id="beat-03" className="h-auto py-12 lg:min-h-[100vh] flex flex-col justify-center">
+          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-6">Skills listed. Context missing.</h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A resume can show what someone says they know, but not the depth, process, decisions, experiments, or evidence behind the work.
           </p>
+          <div className="lg:hidden w-full h-32 border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4">
+             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Resume (Minimal)</span>
+          </div>
         </div>
 
-        <div id="beat-04" className="min-h-[100vh] flex flex-col justify-center">
-          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-4">Completion, not capability.</h2>
+        <div id="beat-04" className="h-auto py-12 lg:min-h-[100vh] flex flex-col justify-center">
+          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-6">Completion, not capability.</h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A certificate can confirm that a requirement was completed, but rarely shows what was built, how it was built, or what it demonstrates.
           </p>
+          <div className="lg:hidden w-full h-32 border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4">
+             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Certificate (Static)</span>
+          </div>
         </div>
 
-        <div id="beat-05" className="min-h-[100vh] flex flex-col justify-center">
-          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-4">Highlights, not the full story.</h2>
+        <div id="beat-05" className="min-h-[45vh] lg:min-h-[100vh] flex flex-col justify-center py-12">
+          <h2 className="font-sans text-2xl lg:text-3xl text-foreground leading-[1.1] tracking-tight mb-6">Highlights, not the full story.</h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             Portfolios can tell a better story, but they are still a curated view of the work.
           </p>
+          <div className="lg:hidden w-full aspect-video border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-lg">
+             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Portfolio (Subtle Reveal)</span>
+          </div>
         </div>
 
-        <div id="beat-06" className="min-h-[100vh] flex flex-col justify-center">
-          <h2 className="font-sans text-3xl lg:text-4xl text-foreground leading-[1.1] tracking-tight mb-4">The evidence exists. It just gets lost.</h2>
+        <div id="beat-06" className="min-h-[65vh] lg:min-h-[100vh] flex flex-col justify-center py-12">
+          <h2 className="font-sans text-3xl lg:text-4xl text-foreground leading-[1.1] tracking-tight mb-6">The evidence exists. It just gets lost.</h2>
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             The same body of work can appear very differently depending on how it is represented. Each format captures a fragment, and important context is often lost.
           </p>
           
-          {/* Mobile Visual */}
-          <div className="md:hidden flex flex-col items-center gap-4 bg-[#070709] px-12 py-8 border border-white/10 shadow-[0_0_50px_rgba(0,107,255,0.05)]">
-            <div className="text-3xl text-white font-sans tracking-tight">8.6 / 10</div>
-            <div className="text-[10px] text-white/50 font-mono tracking-widest uppercase">Loss of Context</div>
+          <div className="lg:hidden w-full aspect-[4/3] border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-2xl mobile-visual-loss overflow-hidden relative">
+             <div className="absolute inset-0 bg-gradient-to-t from-[#070709] to-transparent opacity-80" />
+             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center relative z-10">Mockup Placeholder<br/>Information Loss (Dense Transform)</span>
           </div>
         </div>
 
       </div>
 
-      {/* VISUAL COLUMN (Sticky) */}
-      <div className="hidden md:block w-7/12 h-[100vh] sticky top-0 z-10 flex items-center justify-center overflow-hidden p-12">
+      {/* VISUAL COLUMN (Sticky on Desktop, hidden on Mobile) */}
+      <div className="hidden lg:flex w-7/12 h-[100vh] sticky top-0 z-10 items-center justify-center overflow-hidden p-12">
         
         {/* Visual 01: Work */}
         <div className="absolute inset-12 flex items-center justify-center visual-work">
@@ -221,11 +243,6 @@ export function Act1Problem() {
           </div>
         </div>
 
-      </div>
-
-      {/* MOBILE VISUALS (Inline) */}
-      <div className="block md:hidden w-full flex flex-col gap-12 mt-12 mb-24">
-         {/* Simplified mobile flow logic can be handled separately or interleaved with text */}
       </div>
 
     </div>

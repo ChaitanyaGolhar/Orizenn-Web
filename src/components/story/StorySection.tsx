@@ -33,15 +33,15 @@ export function StorySection() {
     <section className="relative w-full bg-[#070709] border-t border-border/50">
       
       <div className="py-24 md:py-32">
-        <Container className="relative w-full flex flex-col md:flex-row items-start">
+        <Container className="relative w-full flex flex-col lg:flex-row items-start">
           
           {/* LEFT: STORY RAIL (Hidden on mobile) */}
-          <div className="hidden md:flex w-[25%] sticky top-[25vh] h-[50vh] flex-col justify-center pr-8 z-20">
+          <div className="hidden lg:flex w-[25%] sticky top-[25vh] h-[50vh] flex-col justify-center pr-8 z-20">
             <StoryRail activeActId={activeActId} />
           </div>
 
           {/* RIGHT: STORY CONTENT (The 4 Acts) */}
-          <div className="w-full md:w-[75%] relative z-10 flex flex-col gap-24 md:gap-32">
+          <div className="w-full lg:w-[75%] relative z-10 flex flex-col gap-16 lg:gap-32">
             <Act1Problem />
             <Act2Approach />
             <Act3HowItWorks />
