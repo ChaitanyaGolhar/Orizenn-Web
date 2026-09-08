@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Container } from '../ui/Container';
 import { TechnicalGrid } from '../ui/TechnicalGrid';
 import { EvidenceMotif } from '../ui/EvidenceMotif';
 
@@ -52,13 +51,11 @@ export function ClearerWay() {
   return (
     <section 
       ref={sectionRef} 
-      className="w-full bg-background py-20 md:py-32 px-5 sm:px-8"
+      className="relative w-full bg-[#070709] border-t border-border/10 py-24 md:py-40 lg:py-48 overflow-hidden flex flex-col items-center justify-center px-6"
     >
-      <Container className="max-w-[1200px] mx-auto p-0">
-        <div className="relative w-full bg-[#070709] rounded-[24px] md:rounded-[32px] border border-border/10 overflow-hidden flex flex-col items-center justify-center px-6 py-14 md:px-16 md:py-20 lg:px-24">
-          <TechnicalGrid className="clearer-way-grid" />
+      <TechnicalGrid className="clearer-way-grid" />
 
-          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[700px] mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[700px] mx-auto">
             
             <div className="clearer-way-anim font-mono text-[10px] md:text-[11px] tracking-[0.1em] text-muted uppercase mb-10">
               A CLEARER WAY TO UNDERSTAND TECHNICAL WORK
@@ -94,8 +91,6 @@ export function ClearerWay() {
             <EvidenceMotif className="clearer-way-anim" />
 
           </div>
-        </div>
-      </Container>
     </section>
   );
 }

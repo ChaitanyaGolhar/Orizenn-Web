@@ -55,7 +55,7 @@ export function Navigation() {
           <Link href="/product" className={`font-sans text-muted transition-colors hover:text-foreground ${isFloating ? 'text-[13px]' : 'text-small'}`}>Product</Link>
           <Link href="/how-it-works" className={`font-sans text-muted transition-colors hover:text-foreground ${isFloating ? 'text-[13px]' : 'text-small'}`}>How It Works</Link>
           <Link href="/institutions" className={`font-sans text-muted transition-colors hover:text-foreground ${isFloating ? 'text-[13px]' : 'text-small'}`}>For Institutions</Link>
-          <Link href="/evidence" className={`font-sans text-muted transition-colors hover:text-foreground ${isFloating ? 'text-[13px]' : 'text-small'}`}>Evidence</Link>
+
           <Link href="/about" className={`font-sans text-muted transition-colors hover:text-foreground ${isFloating ? 'text-[13px]' : 'text-small'}`}>About</Link>
         </nav>
 

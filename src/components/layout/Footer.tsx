@@ -1,51 +1,67 @@
-import Link from 'next/link';
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Container } from '../ui/Container';
+import { FooterTop } from './footer/FooterTop';
+import { FooterMeta } from './footer/FooterMeta';
+import { FooterWordmark } from './footer/FooterWordmark';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      const elements = gsap.utils.toArray('.footer-anim-element');
+      
+      gsap.set(elements, { opacity: 0, y: 20 });
+
+      ScrollTrigger.create({
+        trigger: footerRef.current,
+        start: 'top 85%',
+        onEnter: () => {
+          gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          });
+        },
+        once: true
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="bg-background pt-32 pb-16 border-t border-border">
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-16 mb-32">
-          
-          <div className="flex flex-col gap-6">
-            <Image 
-              src="/logo.svg" 
-              alt="Orizenn Logo" 
-              width={40} 
-              height={40} 
-              className="w-10 h-10"
-            />
-            <p className="font-sans text-muted">Let the work speak.</p>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Product</h4>
-            <Link href="/product" className="font-sans text-small text-muted transition-colors hover:text-foreground">Product</Link>
-            <Link href="/how-it-works" className="font-sans text-small text-muted transition-colors hover:text-foreground">How It Works</Link>
-            <Link href="/evidence" className="font-sans text-small text-muted transition-colors hover:text-foreground">Evidence</Link>
-            <a href="https://app.orizenn.com" className="font-sans text-small text-muted transition-colors hover:text-foreground">Open App ↗</a>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Company</h4>
-            <Link href="/about" className="font-sans text-small text-muted transition-colors hover:text-foreground">About</Link>
-            <Link href="/institutions" className="font-sans text-small text-muted transition-colors hover:text-foreground">For Institutions</Link>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <h4 className="font-mono text-micro font-medium text-foreground uppercase tracking-widest">Resources</h4>
-            <Link href="/insights" className="font-sans text-small text-muted transition-colors hover:text-foreground">Insights</Link>
-            <Link href="/docs" className="font-sans text-small text-muted transition-colors hover:text-foreground">Documentation</Link>
-            <Link href="/updates" className="font-sans text-small text-muted transition-colors hover:text-foreground">Updates</Link>
-          </div>
-
+    <footer 
+      ref={footerRef} 
+      className="bg-[#050608] pt-24 md:pt-40 overflow-hidden"
+    >
+      <Container className="flex flex-col relative z-10">
+        
+        {/* Top Region: Brand & Navigation */}
+        <div className="mb-24 md:mb-32">
+          <FooterTop />
         </div>
 
-        <div className="pt-8 border-t border-border font-sans text-micro text-muted">
-          <p>© 2026 Orizenn. All rights reserved.</p>
-        </div>
+        {/* Bottom Region: Divider & Legal */}
+        <FooterMeta />
+
       </Container>
+
+      {/* Hero Wordmark (Edge to edge, spans below container) */}
+      <FooterWordmark />
+      
     </footer>
   );
 }
