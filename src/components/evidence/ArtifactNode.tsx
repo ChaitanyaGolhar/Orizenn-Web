@@ -2,6 +2,7 @@ interface ArtifactNodeProps {
   label: string;
   metadata?: string;
   markerType?: 'dot' | 'ring' | 'cross' | 'tick';
+  type?: string;
   isActive?: boolean;
   className?: string;
   id?: string;

@@ -88,12 +88,12 @@ export function Hero() {
           </div>
 
           {/* Centered Editorial Headline */}
-          <h1 className="hero-text-anim font-sans text-h1 md:text-hero font-normal leading-[1.05] tracking-[-0.04em] text-foreground m-0 whitespace-nowrap">
+          <h1 className="hero-text-anim font-sans text-4xl sm:text-5xl md:text-hero font-normal leading-[1.05] tracking-[-0.04em] text-foreground m-0 whitespace-normal md:whitespace-nowrap">
             Let the work speak.
           </h1>
-
+          
           <p className="hero-text-anim text-small md:text-lg text-muted max-w-[460px] leading-[1.6] m-0">
-            Turn technical work into structured evidence<br className="hidden sm:block" /> for clearer evaluation and deeper understanding.
+            Turn technical work into structured evidence<br className="hidden md:block" /> for clearer evaluation and deeper understanding.
           </p>
 
           <div className="hero-text-anim flex flex-col sm:flex-row items-center gap-5 mt-6 pointer-events-auto w-full sm:w-auto">
@@ -124,8 +124,8 @@ export function Hero() {
 
         {/* Product Visual Proof Placeholder */}
         <div ref={mockupRef} className="w-full max-w-[1100px] mx-auto perspective-[1000px]">
-          <div className="w-full will-change-transform h-[500px] md:h-[600px] bg-[#0c0c0e] rounded-xl border border-border/50 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex items-center justify-center">
-            <span className="font-mono text-muted/50 uppercase tracking-widest">Product Mockup Placeholder</span>
+          <div className="w-full will-change-transform h-[300px] sm:h-[400px] md:h-[600px] bg-[#0c0c0e] rounded-xl border border-border/50 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex items-center justify-center">
+            <span className="font-mono text-[10px] md:text-xs text-muted/50 uppercase tracking-widest text-center px-4">Product Mockup Placeholder</span>
           </div>
         </div>
 
