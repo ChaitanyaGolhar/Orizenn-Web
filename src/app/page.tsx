@@ -1,10 +1,10 @@
 import { Hero } from '@/components/sections/Hero';
 import { StorySection } from '@/components/story/StorySection';
 import { ProductReveal } from '@/components/sections/ProductReveal';
-import { Audience } from '@/components/sections/Audience';
+import { WhyItMatters } from '@/components/sections/why-it-matters/WhyItMatters';
 import { Institutions } from '@/components/sections/Institutions';
 import { Trust } from '@/components/sections/Trust';
-import { FinalCTA } from '@/components/sections/FinalCTA';
+import { ClearerWay } from '@/components/sections/ClearerWay';
 
 export default function Home() {
   return (
@@ -12,10 +12,10 @@ export default function Home() {
       <Hero />
       <StorySection />
       <ProductReveal />
-      <Audience />
+      <WhyItMatters />
       <Institutions />
       <Trust />
-      <FinalCTA />
+      <ClearerWay />
     </main>
   );
 }
