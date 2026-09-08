@@ -9,21 +9,28 @@ export function EvidenceNode({ label, isActive = false, className = '', id }: Ev
   return (
     <div 
       id={id}
-      className={`inline-flex items-center gap-3 px-4 py-2 border rounded-md transition-all duration-500 relative bg-surface
-        ${isActive 
-          ? 'border-[rgba(0,102,255,0.3)] shadow-[0_0_20px_rgba(0,102,255,0.1)]' 
-          : 'border-border'
-        } ${className}`}
+      className={`inline-flex items-center gap-3 transition-opacity duration-700 ${className}
+        ${isActive ? 'opacity-100' : 'opacity-40'}
+      `}
     >
-      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500
-        ${isActive 
-          ? 'bg-signal shadow-[0_0_10px_var(--color-signal)]' 
-          : 'bg-muted'
-        }`} 
-      />
-      <span className={`font-mono text-micro uppercase tracking-widest transition-all duration-500
-        ${isActive ? 'text-foreground' : 'text-muted'}
-      `}>
+      {/* Structural Intersection Point */}
+      <div className="relative flex items-center justify-center w-4 h-4">
+        {/* Horizontal & Vertical grid lines intersecting at the node */}
+        <div className="absolute w-[200%] h-[1px] bg-signal/30 -z-10" />
+        <div className="absolute h-[200%] w-[1px] bg-signal/30 -z-10" />
+        
+        {/* The Node Core */}
+        <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-700
+          ${isActive ? 'bg-signal' : 'bg-muted/50'}
+        `} />
+        
+        {/* Outer Structural Ring */}
+        <div className={`absolute inset-0 rounded-full border transition-colors duration-700
+          ${isActive ? 'border-signal/40' : 'border-transparent'}
+        `} />
+      </div>
+      
+      <span className="font-sans text-[14px] font-medium tracking-[0.1em] text-foreground uppercase">
         {label}
       </span>
     </div>
