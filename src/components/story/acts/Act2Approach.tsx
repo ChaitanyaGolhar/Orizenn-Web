@@ -60,16 +60,16 @@ export function Act2Approach() {
             Orizenn begins with the technical work itself — not only the claim made about it. It discovers the artifacts inside a project, organizes the evidence they contain, and brings that evidence into a clearer view.
           </p>
           
-          <div className="lg:hidden w-full aspect-square border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-xl mobile-visual-reconstruct">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Reconstruction (Scroll Transform)</span>
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative mobile-visual-reconstruct">
+            <img src="/approach-mockup.png" alt="A Different Approach" className="w-full h-auto object-contain" />
           </div>
         </div>
       </div>
 
       {/* VISUAL COLUMN (Sticky on Desktop) */}
       <div className="hidden lg:flex w-7/12 h-[100vh] sticky top-0 z-10 items-center justify-center overflow-hidden p-12">
-        <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center shadow-xl">
-          <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>A Different Approach</span>
+        <div className="absolute inset-0 flex items-center justify-center">
+           <img src="/approach-mockup.png" alt="A Different Approach" className="w-full h-full object-contain scale-105" />
         </div>
       </div>
 

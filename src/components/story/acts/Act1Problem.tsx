@@ -14,109 +14,60 @@ export function Act1Problem() {
     const mm = gsap.matchMedia();
     
     mm.add("(min-width: 1024px)", () => {
-      // We will set up scroll-linked timelines here
-      // linking the text blocks to the visual state.
-      
       const visuals = {
         work: '.visual-work',
         grade: '.visual-grade',
         resume: '.visual-resume',
         cert: '.visual-cert',
         portfolio: '.visual-portfolio',
-        loss: '.visual-loss'
+        loss: '.visual-loss',
       };
 
-      // Hide all except work initially
-      gsap.set([visuals.grade, visuals.resume, visuals.cert, visuals.portfolio, visuals.loss], { opacity: 0, scale: 0.95 });
+      // Hide grade, resume, cert, portfolio, and loss initially by positioning them below the viewport
+      gsap.set([visuals.grade, visuals.resume, visuals.cert, visuals.portfolio, visuals.loss], { yPercent: 100, opacity: 1, scale: 1 });
+      gsap.set(visuals.work, { yPercent: 0, opacity: 1, scale: 1 });
 
-      // 02 Grade Trigger
-      ScrollTrigger.create({
-        trigger: '#beat-02',
-        start: 'top center',
-        end: 'bottom center',
-        scrub: true,
-        animation: gsap.timeline()
-          .to(visuals.work, { opacity: 0.1, scale: 0.9, duration: 1 })
-          .to(visuals.grade, { opacity: 1, scale: 1, duration: 1 }, "<")
-      });
+      const beatsData = [
+        { id: '#beat-01', leave: null, enter: visuals.work },
+        { id: '#beat-02', leave: visuals.work, enter: visuals.grade },
+        { id: '#beat-03', leave: visuals.grade, enter: visuals.resume },
+        { id: '#beat-04', leave: visuals.resume, enter: visuals.cert },
+        { id: '#beat-05', leave: visuals.cert, enter: visuals.portfolio },
+        { id: '#beat-06', leave: visuals.portfolio, enter: visuals.loss }
+      ];
 
-      // 03 Resume Trigger
-      ScrollTrigger.create({
-        trigger: '#beat-03',
-        start: 'top center',
-        end: 'bottom center',
-        scrub: true,
-        animation: gsap.timeline()
-          .to(visuals.grade, { opacity: 0, scale: 0.95, duration: 1 })
-          .to(visuals.resume, { opacity: 1, scale: 1, duration: 1 }, "<")
-      });
+      beatsData.forEach((beat) => {
+        // 1. Image Swap Trigger (happens before the pin, as the element scrolls into view)
+        if (beat.leave && beat.enter) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: beat.id,
+              start: 'top bottom', // Starts when the top of the new beat hits the bottom of the viewport
+              end: 'center center', // Ends when the new beat is perfectly centered
+              scrub: true,
+            }
+          })
+          .to(beat.leave, { yPercent: -100, ease: 'none' })
+          .to(beat.enter, { yPercent: 0, ease: 'none' }, "<");
+        }
 
-      // 04 Cert Trigger
-      ScrollTrigger.create({
-        trigger: '#beat-04',
-        start: 'top center',
-        end: 'bottom center',
-        scrub: true,
-        animation: gsap.timeline()
-          .to(visuals.resume, { opacity: 0, scale: 0.95, duration: 1 })
-          .to(visuals.cert, { opacity: 1, scale: 1, duration: 1 }, "<")
-      });
-
-      // 05 Portfolio Trigger
-      ScrollTrigger.create({
-        trigger: '#beat-05',
-        start: 'top center',
-        end: 'bottom center',
-        scrub: true,
-        animation: gsap.timeline()
-          .to(visuals.cert, { opacity: 0, scale: 0.95, duration: 1 })
-          .to(visuals.portfolio, { opacity: 1, scale: 1, duration: 1 }, "<")
-      });
-
-      // 06 Information Loss Trigger
-      ScrollTrigger.create({
-        trigger: '#beat-06',
-        start: 'top 80%',
-        end: 'bottom center',
-        scrub: true,
-        animation: gsap.timeline()
-          .to(visuals.portfolio, { opacity: 0, scale: 0.8, duration: 1 })
-          .to(visuals.work, { opacity: 0, scale: 0.8, duration: 1 }, "<")
-          .to(visuals.loss, { opacity: 1, scale: 1, duration: 2 })
-      });
-
-      // Pin each beat in the center of the screen and fade out at the end
-      const beats = ['#beat-01', '#beat-02', '#beat-03', '#beat-04', '#beat-05', '#beat-06'];
-      beats.forEach((beat) => {
+        // 2. Pin and Fade Trigger (happens once the element is centered)
         gsap.timeline({
           scrollTrigger: {
-            trigger: beat,
+            trigger: beat.id,
             start: 'center center',
             end: '+=800',
             pin: true,
             scrub: true,
           }
         })
-        .to(beat, { opacity: 1, duration: 0.6 })
-        .to(beat, { opacity: 0, duration: 0.4 });
+        .to(beat.id, { opacity: 1, duration: 0.6 })
+        .to(beat.id, { opacity: 0, duration: 0.4 });
       });
     });
 
     mm.add("(max-width: 1023px)", () => {
-      // Mobile-specific scroll transformation for Information Loss
-      gsap.fromTo('.mobile-visual-loss', 
-        { scale: 1.1, opacity: 0.5 },
-        {
-          scale: 1,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: '#beat-06',
-            start: 'top 80%',
-            end: 'center center',
-            scrub: true
-          }
-        }
-      );
+      // Any mobile specific animations can go here
     });
 
     return () => mm.revert();
@@ -138,8 +89,8 @@ export function Act1Problem() {
             But much of that work gets reduced to a grade, a resume, a certificate, or a portfolio — signals that rarely show the full picture.
           </p>
           
-          <div className="lg:hidden w-full aspect-square border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-xl">
-            <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Work (Dense)</span>
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/problem-mockup.png" alt="The Problem" className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -148,9 +99,9 @@ export function Act1Problem() {
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A single number rarely captures the process, exploration, decisions, or depth behind the work.
           </p>
-          
-          <div className="lg:hidden flex justify-center py-8">
-            <span className="font-mono text-xl text-white/30 uppercase tracking-widest text-center">Mockup Placeholder: Grade</span>
+
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/grade-mockup.png" alt="A snapshot, not the work" className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -159,8 +110,9 @@ export function Act1Problem() {
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A resume can show what someone says they know, but not the depth, process, decisions, experiments, or evidence behind the work.
           </p>
-          <div className="lg:hidden w-full h-32 border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Resume (Minimal)</span>
+
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/resume-mockup.png" alt="Skills listed. Context missing." className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -169,8 +121,9 @@ export function Act1Problem() {
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             A certificate can confirm that a requirement was completed, but rarely shows what was built, how it was built, or what it demonstrates.
           </p>
-          <div className="lg:hidden w-full h-32 border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Certificate (Static)</span>
+
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/cert-mockup.png" alt="Completion, not capability." className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -179,8 +132,9 @@ export function Act1Problem() {
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             Portfolios can tell a better story, but they are still a curated view of the work.
           </p>
-          <div className="lg:hidden w-full aspect-video border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-lg">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center">Mockup Placeholder<br/>Portfolio (Subtle Reveal)</span>
+
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/portfolio-mockup.png" alt="Highlights, not the full story." className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -189,10 +143,9 @@ export function Act1Problem() {
           <p className="text-muted text-sm lg:text-base leading-relaxed mb-8">
             The same body of work can appear very differently depending on how it is represented. Each format captures a fragment, and important context is often lost.
           </p>
-          
-          <div className="lg:hidden w-full aspect-[4/3] border border-white/10 bg-white/5 rounded-xl flex items-center justify-center mt-4 shadow-2xl mobile-visual-loss overflow-hidden relative">
-             <div className="absolute inset-0 bg-gradient-to-t from-[#070709] to-transparent opacity-80" />
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest text-center relative z-10">Mockup Placeholder<br/>Information Loss (Dense Transform)</span>
+
+          <div className="lg:hidden w-full flex items-center justify-center mt-8 relative">
+            <img src="/loss-mockup.png" alt="The evidence exists. It just gets lost." className="w-full h-auto object-contain" />
           </div>
         </div>
 
@@ -202,45 +155,33 @@ export function Act1Problem() {
       <div className="hidden lg:flex w-7/12 h-[100vh] sticky top-0 z-10 items-center justify-center overflow-hidden p-12">
         
         {/* Visual 01: Work */}
-        <div className="absolute inset-12 flex items-center justify-center visual-work">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Work</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-work">
+           <img src="/problem-mockup.png" alt="The Problem Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
         {/* Visual 02: Grade */}
-        <div className="absolute inset-12 flex items-center justify-center visual-grade">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Grade</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-grade">
+           <img src="/grade-mockup.png" alt="Grade Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
         {/* Visual 03: Resume */}
-        <div className="absolute inset-12 flex flex-col items-center justify-center visual-resume">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Resume</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-resume">
+           <img src="/resume-mockup.png" alt="Resume Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
         {/* Visual 04: Certificate */}
-        <div className="absolute inset-12 flex items-center justify-center visual-cert">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Certificate</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-cert">
+           <img src="/cert-mockup.png" alt="Certificate Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
         {/* Visual 05: Portfolio */}
-        <div className="absolute inset-12 flex flex-col items-center justify-center visual-portfolio">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Portfolio</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-portfolio">
+           <img src="/portfolio-mockup.png" alt="Portfolio Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
         {/* Visual 06: Information Loss */}
-        <div className="absolute inset-12 flex flex-col items-center justify-center visual-loss">
-          <div className="w-full h-full border border-white/10 bg-white/5 rounded-xl flex items-center justify-center">
-             <span className="font-mono text-sm text-white/30 uppercase tracking-widest">Mockup Placeholder: Information Loss</span>
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center visual-loss">
+           <img src="/loss-mockup.png" alt="Information Loss Mockup" className="w-full h-full object-contain scale-105" />
         </div>
 
       </div>

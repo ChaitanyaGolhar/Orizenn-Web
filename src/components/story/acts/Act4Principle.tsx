@@ -36,17 +36,9 @@ export function Act4Principle() {
       <div id="beat-11" className="h-auto py-16 lg:min-h-[100vh] flex flex-col items-center justify-center relative z-20 w-full">
         
         <span className="font-mono text-[10px] text-signal tracking-widest uppercase mb-8 lg:mb-16 block">THE ORIZENN APPROACH</span>
-        
-        <div className="flex flex-col items-center gap-8 text-center w-full max-w-4xl mx-auto my-8 lg:my-12">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-sans font-light tracking-tighter text-foreground">
-            EVIDENCE
-          </h2>
-          <div className="w-[1px] h-12 lg:h-24 bg-gradient-to-b from-[#006BFF]/80 to-transparent" />
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-sans font-light tracking-tighter text-muted">
-            ASSUMPTION
-          </h2>
+        <div className="w-11/12 lg:w-full flex items-center justify-center my-8 lg:my-12 max-w-4xl mx-auto relative">
+           <img src="/principle-mockup.png" alt="Orizenn Principle" className="w-full h-auto object-contain" />
         </div>
-        
         <div className="mt-8 lg:mt-24 max-w-lg text-center">
           <p className="text-muted text-sm lg:text-base leading-relaxed">
             Orizenn is built around a simple idea: technical work should be understood through the evidence inside the work itself.
